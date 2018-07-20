@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".trash.DifferentRestApproachesActivity" />
+        <activity android:name=".trash.ThreadsVsCoroutines" />
+        <activity android:name=".trash.ChannelExampleActivity" />
+        <activity android:name=".CoroutineBasicsActivity" />
+        <activity android:name=".CancellationAndTimeoutsActivity" />
+        <activity android:name=".ComposingSuspendingFunctionsActivity" />
+        <activity android:name=".CoroutineContextAndDispatchersActivity" />
+        <activity android:name=".ChannelsActivity" />
+        <activity android:name=".SharedMutableStateAndConcurrency" />
+        <activity android:name=".SelectExpression" />
     </application>
 
 </manifest>
