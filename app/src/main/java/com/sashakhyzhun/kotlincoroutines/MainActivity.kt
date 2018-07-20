@@ -2,12 +2,7 @@ package com.sashakhyzhun.kotlincoroutines
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.sashakhyzhun.kotlincoroutines.trash.ChannelExampleActivity
-import com.sashakhyzhun.kotlincoroutines.trash.DifferentRestApproachesActivity
-import com.sashakhyzhun.kotlincoroutines.trash.ThreadsVsCoroutines
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.experimental.*
-import kotlinx.coroutines.experimental.channels.produce
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
