@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <Button
-        android:text="test"
-        android:id="@+id/btn_test"
-        android:layout_width="wrap_content"
+        android:text="Your first coroutine"
+        android:id="@+id/btn_first_coroutine"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:text="Bridging blocking and Non-blocking"
+        android:id="@+id/btn_bridging_blocking_and_non_blocking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Waiting for a job"
+        android:id="@+id/btn_waiting_for_a_job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Extract function refactoring"
+        android:id="@+id/btn_extract_function_refactoring"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Coroutines are light-weight"
+        android:id="@+id/btn_coroutines_are_light_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="Coroutines are like daemon threads"
+        android:id="@+id/btn_coroutines_are_like_daemon_threads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>
