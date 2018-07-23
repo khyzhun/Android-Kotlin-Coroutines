@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:text="Cancelling coroutine execution"
+        android:id="@+id/btn_cancelling_coroutine_execution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:text="Cancellation is cooperative"
+        android:id="@+id/btn_cancellation_is_cooperative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:text="Making computation code cancellable"
+        android:id="@+id/btn_making_computation_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:text="Closing resources with finally"
+        android:id="@+id/btn_closing_resources_with_finally"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:text="Run non-cancellable block"
+        android:id="@+id/btn_run_non_cancellable_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:text="Timeout"
+        android:id="@+id/btn_timeout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+
+</LinearLayout>

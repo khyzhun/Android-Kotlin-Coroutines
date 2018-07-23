@@ -153,12 +153,13 @@ class CoroutineBasicsActivity : AppCompatActivity() {
 
     private fun coroutinesAreLikeDaemonThreads() = runBlocking {
         launch {
-            repeat(1000) { i ->
+            repeat(100) { i ->
                 println("I'm sleeping $i...")
-                delay(500L)
+                delay(250L)
             }
         }
         delay(1300) // just quit after delay.
+        println("done.")
     }
 
 

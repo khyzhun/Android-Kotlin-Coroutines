@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             startActivity<CoroutineContextAndDispatchersActivity>()
         }
 
-        btnChannels.setOnClickListener {
+        btn_cancelling_coroutine_execution.setOnClickListener {
             startActivity<ChannelsActivity>()
         }
 
