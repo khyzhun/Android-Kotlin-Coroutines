@@ -3,11 +3,8 @@ package com.sashakhyzhun.kotlincoroutines
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_channels.*
-import kotlinx.coroutines.experimental.cancelChildren
+import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.channels.*
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 import kotlin.coroutines.experimental.CoroutineContext
 import kotlin.coroutines.experimental.coroutineContext
 
@@ -282,7 +279,7 @@ class ChannelsActivity : AppCompatActivity() {
      */
     private fun bufferedChannels() = runBlocking {
         val channel = Channel<Int>(4) // create buffered channel
-        val senser = launch(coroutineContext) { // launch sender coroutine
+        val sender = launch(coroutineContext) { // launch sender coroutine
             repeat(10) {
                 println("Sending $it") // print before sensing each element
                 channel.send(it) // will suspend when buffer is full
@@ -290,15 +287,95 @@ class ChannelsActivity : AppCompatActivity() {
         }
         // don't receive anything... just wait.....
         delay(1000)
-        senser.cancel() // cancel sender coroutine
+        sender.cancel() // cancel sender coroutine
     }
 
     private fun tickerChannels() = runBlocking {
+        val tickerChannel = ticker(delay = 100, initialDelay = 0) // create ticker channel
 
+        var nextElement = withTimeoutOrNull(1) {
+            tickerChannel.receive() // initial delay hasn't passed yet
+        }
+        println("Initial element is available immediately: $nextElement")
+
+        nextElement = withTimeoutOrNull(50) {
+            tickerChannel.receive() // all subsequent elements has 100ms delay
+        }
+        println("Next element is not ready in 50 ms: $nextElement")
+
+        nextElement = withTimeoutOrNull(60) {
+            tickerChannel.receive()
+        }
+        println("Next element is ready in 100 ms: $nextElement")
+
+        // Emulate large consumption delays
+        println("Consumer pauses for 150ms")
+        delay(150)
+
+        // Next element is available immediately
+        nextElement = withTimeoutOrNull(1) {
+            tickerChannel.receive()
+        }
+        println("Next element is available immediately after large consumer delay: $nextElement")
+
+        // Note that the pause between `receive` calls is taken into
+        // account and next element arrives faster
+        nextElement = withTimeoutOrNull(60) {
+            tickerChannel.receive()
+        }
+        println("Next element is ready in 50ms after consumer pause in 150ms: $nextElement")
+
+        tickerChannel.cancel() // indicate that no more elements are needed
     }
 
+    /**
+     * Send and receive operations to channels are fair with respect to the order of their
+     * invocation from multiple coroutines. They are served in first-in first-out order, e.g.
+     * the first coroutine to invoke receive gets the element.
+     *
+     * In the following example two coroutines "ping" and "pong" are
+     * receiving the "ball" object from the shared "table" channel.
+     */
     private fun channelsAreFair() = runBlocking {
 
+        data class Ball(var hits: Int)
+
+        suspend fun play(name: String, table: Channel<Ball>) {
+            for (ball in table) {
+                ball.hits++
+                println("$name $ball")
+                delay(300) // wait a bit
+                table.send(ball)
+            }
+        }
+
+        val table = Channel<Ball>() // a shared table
+        launch(coroutineContext) { play("ping", table) }
+        launch(coroutineContext) { play("pong", table) }
+        launch(coroutineContext) { play("bong", table) }
+        launch(coroutineContext) { play("long", table) }
+        table.send(Ball(0)) // serve the ball
+
+        delay(1000) // 1 sec
+
+        coroutineContext.cancelChildren() // game over, cancel them
+
+        /**
+         * The "ping" coroutine is started first, so it is the first one to receive the ball.
+         * Even though "ping" coroutine immediately starts receiving the ball again after sending
+         * it back to the table, the ball gets received by the "pong" coroutine,
+         * because it was already waiting for it:
+         *
+         * ping Ball(hits=1)
+         * pong Ball(hits=2)
+         * ping Ball(hits=3)
+         * pong Ball(hits=4)
+         */
+
+        /**
+         * Note, that sometimes channels may produce executions that look unfair due
+         * to the nature of the executor that is being used. See this issue for details.
+         */
     }
 
 
