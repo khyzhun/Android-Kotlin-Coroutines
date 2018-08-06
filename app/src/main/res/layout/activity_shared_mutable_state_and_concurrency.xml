@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_the_problem"
+        android:text="The problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_volatiles_are_of_no_help"
+        android:text="Volatiles are of no help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_thread_safe-data-structures"
+        android:text="Thread-safe data structures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_thread_confinement_fine-grained"
+        android:text="Thread confinement fine-grained"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_thread_confinement_coarse_grained"
+        android:text="Thread confinement coarse-grained"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_mutual_exclusion"
+        android:text="Mutual exclusion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_actors"
+        android:text="Actors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </android.support.constraint.ConstraintLayout>

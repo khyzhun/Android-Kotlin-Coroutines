@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_coroutine_context_and_dispatchers.*
 import kotlinx.coroutines.experimental.*
-import org.jetbrains.anko.custom.async
 import kotlin.coroutines.experimental.coroutineContext
 
 class CoroutineContextAndDispatchersActivity : AppCompatActivity() {
@@ -36,7 +35,7 @@ class CoroutineContextAndDispatchersActivity : AppCompatActivity() {
 
         btn_job_in_the_context.setOnClickListener { jobInTheContext() }
 
-        btn__childer_of_a_coroutine.setOnClickListener { childrenOfACoroutine() }
+        btn_children_of_a_coroutine.setOnClickListener { childrenOfACoroutine() }
 
         btn_combining_contexts.setOnClickListener { combiningContexts() }
 

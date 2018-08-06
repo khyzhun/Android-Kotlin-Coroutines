@@ -43,7 +43,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn__childer_of_a_coroutine"
+            android:id="@+id/btn_children_of_a_coroutine"
             android:text="Children of a coroutine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
