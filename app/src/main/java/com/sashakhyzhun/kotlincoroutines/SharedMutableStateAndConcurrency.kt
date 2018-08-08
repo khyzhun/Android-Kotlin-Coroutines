@@ -2,6 +2,7 @@ package com.sashakhyzhun.kotlincoroutines
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.reactivex.Completable
 import kotlinx.android.synthetic.main.activity_shared_mutable_state_and_concurrency.*
 import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.channels.actor
@@ -258,6 +259,16 @@ class SharedMutableStateAndConcurrency : AppCompatActivity() {
                 is GetCounter -> msg.response.complete(counter)
             }
         }
+
+        /**
+         * It does not matter (for correctness) what context the actor itself is executed in.
+         * An actor is a coroutine and a coroutine is executed sequentially, so confinement of
+         * the state to the specific coroutine works as a solution to the problem of
+         * shared mutable state. Indeed, actors may modify their own private state, but can
+         * only affect each other through messages (avoiding the need for any locks).
+
+        Actor is more efficient than locking under load, because in this case it always has work to do and it does not have to switch to a different context at all.
+         */
     }
 
 
